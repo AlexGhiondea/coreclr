@@ -16,7 +16,7 @@
     <SourceDir Condition="'$(__SourceDir)'==''">$(ProjectDir)\src\</SourceDir>
 
     <PackagesDir>$(__PackagesDir)\</PackagesDir>
-    <PackagesDir Condition="'$(__PackagesDir)'==''">$(SourceDir)\.nuget\</PackagesDir>
+    <PackagesDir Condition="'$(__PackagesDir)'==''">$(ProjectDir)\packages\</PackagesDir>
 
     <RootBinDir>$(__RootBinDir)\</RootBinDir>
     <RootBinDir Condition="'$(__RootBinDir)'==''">$(ProjectDir)\binaries\</RootBinDir>
@@ -47,10 +47,15 @@
 
   <!-- Common build tool properties -->
   <PropertyGroup>
-    <BuildToolsPackageName>Microsoft.DotNet.BuildTools.CoreCLR</BuildToolsPackageName>
-    <BuildToolsVersion>1.0.1-prerelease</BuildToolsVersion>
-    <BuildToolsInstallSempahore>$(ToolsDir)BuildTools.$(BuildToolsVersion).installed.semaphore</BuildToolsInstallSempahore>
-    <BuildToolsTargetInputs>$(MSBuildThisFileFullPath);$(MSBuildThisFileDirectory)build.proj</BuildToolsTargetInputs>
-    <BuildToolsTargetOutputs>$(BuildToolsInstallSempahore)</BuildToolsTargetOutputs>
+
+    <BuildToolsCoreCLRPackageName>Microsoft.DotNet.BuildTools.CoreCLR</BuildToolsCoreCLRPackageName>
+    <BuildToolsCoreCLRVersion>1.0.1-prerelease</BuildToolsCoreCLRVersion>
+    <BuildToolsCoreCLRInstallSempahore>$(ToolsDir)BuildTools.$(BuildToolsCoreCLRVersion).installed.semaphore</BuildToolsCoreCLRInstallSempahore>
+
+    <BuildToolsPackageName>Microsoft.DotNet.BuildTools</BuildToolsPackageName>
+    <BuildToolsVersion>1.0.25-prerelease-00007</BuildToolsVersion>
+
+    <BuildToolsCoreCLRTargetInputs>$(MSBuildThisFileFullPath);$(MSBuildThisFileDirectory)build.proj</BuildToolsCoreCLRTargetInputs>
+    <BuildToolsCoreCLRTargetOutputs>$(BuildToolsCoreCLRInstallSempahore)</BuildToolsCoreCLRTargetOutputs>
   </PropertyGroup>
 </Project>

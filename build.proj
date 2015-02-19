@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="dir.props" />
+  <Import Project="$(ToolsDir)\$(BuildToolsPackageName).$(BuildToolsVersion)\lib\packages.targets" />
 
   <!-- Inline task to bootstrap the build to enable downloading nuget.exe -->
   <UsingTask TaskName="DownloadFile" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v12.0.dll">
@@ -45,9 +46,9 @@
 
   <!-- Setup Nuget properties -->
   <ItemGroup>
-    <NuSpecSrcs Include="$(PackagesDir)Microsoft.DotNet.CoreCLR.nuspec" />
-    <NuSpecSrcs Condition="'$(Configuration)'=='Release'" Include="$(PackagesDir)Microsoft.DotNet.CoreCLR.Development.nuspec" />
-    <NuSpecSrcs Condition="'$(Configuration)'=='Debug'" Include="$(PackagesDir)Microsoft.DotNet.CoreCLR.Debug.Development.nuspec" />
+    <NuSpecSrcs Include="$(SourceDir)\.nuget\Microsoft.DotNet.CoreCLR.nuspec" />
+    <NuSpecSrcs Condition="'$(Configuration)'=='Release'" Include="$(SourceDir)\.nuget\Microsoft.DotNet.CoreCLR.Development.nuspec" />
+    <NuSpecSrcs Condition="'$(Configuration)'=='Debug'" Include="$(SourceDir)\.nuget\Microsoft.DotNet.CoreCLR.Debug.Development.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <!-- Backslash appended, see note in dir.props about the PackagesBinDir property -->
@@ -56,6 +57,11 @@
     <NuSpecs Condition="'$(Configuration)'=='Debug'" Include="$(PackagesBinDir)\Microsoft.DotNet.CoreCLR.Debug.Development.nuspec" />
   </ItemGroup>
 
+  <!-- Hook into the local publishing by providing the task that needs to run before we can do the local publishing -->
+  <PropertyGroup>
+    <NugetPackageBuildTargets>BuildNuGetPackages</NugetPackageBuildTargets>
+  </PropertyGroup>
+  
   <!-- Generate Microsoft.Dotnet.CoreCLR nuget package and associated development package -->
   <Target Name="BuildNuGetPackages" AfterTargets="MovePDB" Condition="'$(BuildNugetPackage)' != 'false'">
     <MakeDir Directories="$(PackagesBinDir)" Condition="!Exists('$(PackagesBinDir)')" />
