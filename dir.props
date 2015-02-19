@@ -53,7 +53,7 @@
     <BuildToolsCoreCLRInstallSempahore>$(ToolsDir)BuildTools.$(BuildToolsCoreCLRVersion).installed.semaphore</BuildToolsCoreCLRInstallSempahore>
 
     <BuildToolsPackageName>Microsoft.DotNet.BuildTools</BuildToolsPackageName>
-    <BuildToolsVersion>1.0.25-prerelease-00007</BuildToolsVersion>
+    <BuildToolsVersion>1.0.25-prerelease-00009</BuildToolsVersion>
 
     <BuildToolsCoreCLRTargetInputs>$(MSBuildThisFileFullPath);$(MSBuildThisFileDirectory)build.proj</BuildToolsCoreCLRTargetInputs>
     <BuildToolsCoreCLRTargetOutputs>$(BuildToolsCoreCLRInstallSempahore)</BuildToolsCoreCLRTargetOutputs>
