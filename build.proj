@@ -26,8 +26,8 @@
 
   <Target Name="_RestoreBuildTools"
     BeforeTargets="Build"
-    Inputs="$(BuildToolsTargetInputs)"
-    Outputs="$(BuildToolsTargetOutputs)"
+    Inputs="$(BuildToolsCoreCLRTargetInputs)"
+    Outputs="$(BuildToolsCoreCLRTargetOutputs)"
     >
 
     <!-- Download latest nuget.exe -->
